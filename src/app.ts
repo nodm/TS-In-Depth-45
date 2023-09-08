@@ -218,3 +218,31 @@ const logDamage: DamageLogger = (reason: string) => {
     console.log('Damage reason:', reason);
 };
 logDamage('Foo buzz');
+
+interface Person {
+    name: string;
+    email: string;
+}
+
+interface Author extends Person {
+    numBooksPublished: number;
+}
+
+interface Librarian extends Person {
+    department: string;
+    assistCustomer: (custName: string, bookTitle: string) => void;
+}
+
+const favoriteAuthor: Author = {
+    name: 'Robert Cecil Martin',
+    email: 'rcm@gmail.com',
+    numBooksPublished: 3,
+};
+const favoriteLibrarian: Librarian = {
+    name: 'John Smith',
+    email: 'john.smith@gmail.com',
+    department: 'Fiction',
+    assistCustomer: (custName: string, bookTitle: string) => {
+        console.log(`Assisting ${custName} with "${bookTitle}"`);
+    },
+};
