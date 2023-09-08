@@ -257,3 +257,18 @@ console.log('offer.magazine.getTitle()', offer.magazine?.getTitle?.());
 console.log('offer.book.getTitle()', offer.book?.getTitle?.());
 console.log('offer.book.authors[0]', offer.book?.authors?.[0]);
 console.log('offer.book.authors[0].name', offer.book?.authors?.[0]?.name);
+
+type BookProperties = keyof Book;
+
+function getProperty(book: Book, prop: BookProperties): string | any {
+    if (typeof book[prop] === 'function') {
+        return (book[prop] as Function).name;
+    } else {
+        return book[prop];
+    }
+}
+console.groupCollapsed('getProperty');
+console.log('title:', getProperty(myBook, 'title'));
+console.log('markDamaged:', getProperty(myBook, 'markDamaged'));
+// console.log('isbn:', getProperty(myBook, 'isbn'));
+console.groupEnd();
