@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
@@ -148,3 +150,24 @@ console.groupCollapsed('Available books:');
 const myBooks = checkoutBooks('Ann', 1, 2, 4);
 console.log(myBooks);
 console.groupEnd();
+
+export function getTitles(author: string): string[];
+export function getTitles(available: boolean): string[];
+export function getTitles(id: number, available: boolean): string[];
+export function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
+    const books = getAllBooks();
+
+    if (args.length === 2) {
+        const [id, available] = args;
+        return books.filter(book => book.available === available && book.id === id).map(({ title }) => title);
+    }
+
+    const [arg] = args;
+    if (typeof arg === 'string') {
+        return books.filter(book => book.author === arg).map(({ title }) => title);
+    }
+
+    return books.filter(book => book.available === arg).map(({ title }) => title);
+}
+const checkedOutBooks = getTitles(false);
+console.log('The list of unavailable books:', checkedOutBooks);
