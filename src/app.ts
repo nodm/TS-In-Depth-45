@@ -246,3 +246,14 @@ const favoriteLibrarian: Librarian = {
         console.log(`Assisting ${custName} with "${bookTitle}"`);
     },
 };
+
+const offer: any = {
+    book: {
+        title: 'Essential TypeScript',
+    },
+};
+console.log('offer.magazine', offer?.magazine);
+console.log('offer.magazine.getTitle()', offer.magazine?.getTitle?.());
+console.log('offer.book.getTitle()', offer.book?.getTitle?.());
+console.log('offer.book.authors[0]', offer.book?.authors?.[0]);
+console.log('offer.book.authors[0].name', offer.book?.authors?.[0]?.name);
