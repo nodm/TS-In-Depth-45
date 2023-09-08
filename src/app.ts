@@ -21,8 +21,8 @@ type Book = {
     available: boolean;
 };
 
-function getAllBooks(): Book[] {
-    return [
+function getAllBooks(): readonly Book[] {
+    return <const>[
         {
             id: 1,
             category: Category.JavaScript,
@@ -48,7 +48,7 @@ function getAllBooks(): Book[] {
     ];
 }
 
-function logFirstAvailable(books: Book[]): void {
+function logFirstAvailable(books: readonly Book[]): void {
     console.log('Number of books', books.length);
 
     const firstAvailableBook = books.find(({ available }) => available);
@@ -90,7 +90,7 @@ console.log('Book with index -1', getBookAuthorByIndex(-1));
 console.log('Book with index 1', getBookAuthorByIndex(1));
 
 export function calcTotalPages(): bigint {
-    const data = [
+    const data = <const>[
         { lib: 'libName', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName', books: 5_000_000_000, avgPagesPerBook: 300 },
         { lib: 'libName', books: 3_000_000_000, avgPagesPerBook: 280 },
