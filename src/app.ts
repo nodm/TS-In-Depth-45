@@ -48,7 +48,7 @@ function getAllBooks(): readonly Book[] {
     ];
 }
 
-function logFirstAvailable(books: readonly Book[]): void {
+function logFirstAvailable(books: readonly Book[] = getAllBooks()): void {
     console.log('Number of books', books.length);
 
     const firstAvailableBook = books.find(({ available }) => available);
@@ -59,8 +59,11 @@ function logFirstAvailable(books: readonly Book[]): void {
     console.log('First available book', firstAvailableBook);
 }
 logFirstAvailable(getAllBooks());
+console.groupCollapsed('Log first available book without argument');
+logFirstAvailable();
+console.groupEnd();
 
-function getBookTitlesByCategory(category: Category): string[] {
+function getBookTitlesByCategory(category: Category = Category.JavaScript): string[] {
     return getAllBooks()
         .filter(({ category: bookCategory }) => bookCategory === category)
         .map(({ title }) => title);
@@ -79,6 +82,9 @@ function logBookTitles(titles: string[]): void {
 }
 
 logBookTitles(getBookTitlesByCategory(Category.JavaScript));
+console.groupCollapsed('Call getBookTitlesByCategory without argument');
+logBookTitles(getBookTitlesByCategory());
+console.groupEnd();
 
 export function getBookAuthorByIndex(index: number): [title: string, author: string] {
     const books = getAllBooks();
@@ -112,3 +118,33 @@ let idGenerator: typeof createCustomerID = (name: string, id: number): string =>
 console.log('Call idGenerator (as an arrow function):', idGenerator('Foo', 20));
 idGenerator = createCustomerID;
 console.log('Call idGenerator (as createCustomerID):', idGenerator('Buzz', 30));
+
+function createCustomer(name: string, age?: number, city?: string) {
+    console.groupCollapsed('Create customer');
+    console.log('Customer name:', name);
+    if (age) console.log('Age:', age);
+    if (city) console.log('City:', city);
+    console.groupEnd();
+}
+createCustomer('Anna');
+createCustomer('Foo', 18);
+createCustomer('Buzz', 28, 'Kyiv');
+
+function getBookByID(id: number): Book | undefined {
+    const books = getAllBooks();
+    return books.find(({ id: bookID }) => bookID === id);
+}
+console.log('A book with ID=1', getBookByID(1));
+
+function checkoutBooks(customer: string, ...bookIDs: number[]): string[] {
+    console.log('Customer name:', customer);
+
+    return bookIDs
+        .map(id => getBookByID(id))
+        .filter(book => book?.available)
+        .map(book => book!.title);
+}
+console.groupCollapsed('Available books:');
+const myBooks = checkoutBooks('Ann', 1, 2, 4);
+console.log(myBooks);
+console.groupEnd();
