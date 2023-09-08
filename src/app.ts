@@ -238,14 +238,14 @@ const favoriteAuthor: Author = {
     email: 'rcm@gmail.com',
     numBooksPublished: 3,
 };
-const favoriteLibrarian: Librarian = {
-    name: 'John Smith',
-    email: 'john.smith@gmail.com',
-    department: 'Fiction',
-    assistCustomer: (custName: string, bookTitle: string) => {
-        console.log(`Assisting ${custName} with "${bookTitle}"`);
-    },
-};
+// const favoriteLibrarian: Librarian = {
+//     name: 'John Smith',
+//     email: 'john.smith@gmail.com',
+//     department: 'Fiction',
+//     assistCustomer: (custName: string, bookTitle: string) => {
+//         console.log(`Assisting ${custName} with "${bookTitle}"`);
+//     },
+// };
 
 const offer: any = {
     book: {
@@ -335,3 +335,13 @@ class Encyclopedia extends ReferenceItem {
 const refBook = new Encyclopedia('Britannica', 2023, 10);
 refBook.printItem();
 refBook.printCitation();
+
+class UniversityLibrarian implements Librarian {
+    constructor(public name: string, public email: string, public department: string) {}
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with the book ${bookTitle}`);
+    }
+}
+const favoriteLibrarian: Librarian = new UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
+favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
