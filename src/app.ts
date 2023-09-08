@@ -15,6 +15,10 @@ enum Category {
     Angular = 'Angular',
 }
 
+interface DamageLogger {
+    (reason: string): void;
+}
+
 interface Book {
     id: number;
     title: string;
@@ -22,7 +26,7 @@ interface Book {
     available: boolean;
     category: Category;
     pages?: number;
-    markDamaged?: (reason: string) => void;
+    markDamaged?: DamageLogger;
 }
 
 function getAllBooks(): readonly Book[] {
@@ -209,3 +213,8 @@ const myBook: Book = {
 };
 printBook(myBook);
 myBook.markDamaged?.('Missing back cover');
+
+const logDamage: DamageLogger = (reason: string) => {
+    console.log('Damage reason:', reason);
+};
+logDamage('Foo buzz');
