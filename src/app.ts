@@ -88,7 +88,7 @@ console.groupCollapsed('Call getBookTitlesByCategory without argument');
 logBookTitles(getBookTitlesByCategory());
 console.groupEnd();
 
-export function getBookAuthorByIndex(index: number): [title: string, author: string] {
+function getBookAuthorByIndex(index: number): [title: string, author: string] {
     const books = getAllBooks();
     const { title, author } = books[index] ?? ({} as Book);
 
@@ -97,7 +97,7 @@ export function getBookAuthorByIndex(index: number): [title: string, author: str
 console.log('Book with index -1', getBookAuthorByIndex(-1));
 console.log('Book with index 1', getBookAuthorByIndex(1));
 
-export function calcTotalPages(): bigint {
+function calcTotalPages(): bigint {
     const data = <const>[
         { lib: 'libName', books: 1_000_000_000, avgPagesPerBook: 250 },
         { lib: 'libName', books: 5_000_000_000, avgPagesPerBook: 300 },
@@ -151,10 +151,10 @@ const myBooks = checkoutBooks('Ann', 1, 2, 4);
 console.log(myBooks);
 console.groupEnd();
 
-export function getTitles(author: string): string[];
-export function getTitles(available: boolean): string[];
-export function getTitles(id: number, available: boolean): string[];
-export function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
+function getTitles(author: string): string[];
+function getTitles(available: boolean): string[];
+function getTitles(id: number, available: boolean): string[];
+function getTitles(...args: [string | boolean] | [number, boolean]): string[] {
     const books = getAllBooks();
 
     if (args.length === 2) {
@@ -171,3 +171,19 @@ export function getTitles(...args: [string | boolean] | [number, boolean]): stri
 }
 const checkedOutBooks = getTitles(false);
 console.log('The list of unavailable books:', checkedOutBooks);
+
+function assertString(value: unknown): asserts value is string {
+    if (typeof value !== 'string') throw new TypeError('Value should be a string');
+}
+
+function bookTitleTransform(title: unknown) {
+    assertString(title);
+
+    return [...title].reverse().join('');
+}
+console.log('Transform book title "Refactoring JavaScript"', bookTitleTransform('Refactoring JavaScript'));
+try {
+    bookTitleTransform(123);
+} catch (e) {
+    console.log('Transform book title 123', e);
+}
