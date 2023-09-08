@@ -99,3 +99,16 @@ export function calcTotalPages(): bigint {
     return data.reduce((pages, { books, avgPagesPerBook }) => pages + BigInt(books) * BigInt(avgPagesPerBook), 0n);
 }
 console.log('Total number of pages:', calcTotalPages());
+
+function createCustomerID(name: string, id: number): string {
+    return `${name}_${id}`;
+}
+const myID = createCustomerID('Ann', 10);
+console.log('myID:', myID);
+
+let idGenerator: typeof createCustomerID = (name: string, id: number): string => {
+    return `${name}-${id}`;
+};
+console.log('Call idGenerator (as an arrow function):', idGenerator('Foo', 20));
+idGenerator = createCustomerID;
+console.log('Call idGenerator (as createCustomerID):', idGenerator('Buzz', 30));
