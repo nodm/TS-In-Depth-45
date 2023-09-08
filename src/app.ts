@@ -138,7 +138,7 @@ createCustomer('Anna');
 createCustomer('Foo', 18);
 createCustomer('Buzz', 28, 'Kyiv');
 
-function getBookByID(id: Book['id']): Book | undefined {
+function getBookByID(id: Book['id']): BookOrUndefined {
     const books = getAllBooks();
     return books.find(({ id: bookID }) => bookID === id);
 }
@@ -345,3 +345,30 @@ class UniversityLibrarian implements Librarian {
 }
 const favoriteLibrarian: Librarian = new UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
+
+type PersonBook = Person & Book;
+const personBook: PersonBook = {
+    name: 'Foo Buzz',
+    email: 'fb@gmail.com',
+    id: 987,
+    title: 'Clean Code',
+    author: 'Uncle Bob',
+    available: true,
+    category: Category.JavaScript,
+    pages: 321,
+    // markDamaged?: DamageLogger;
+};
+console.log('personBook:', personBook);
+
+type BookOrUndefined = Book | undefined;
+
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+function setDefaultConfig(options: TOptions) {
+    return {
+        duration: options.duration ?? 3,
+        speed: options.speed ?? 50,
+    };
+}
