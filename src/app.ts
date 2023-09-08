@@ -273,7 +273,7 @@ console.log('markDamaged:', getProperty(myBook, 'markDamaged'));
 // console.log('isbn:', getProperty(myBook, 'isbn'));
 console.groupEnd();
 
-class ReferenceItem {
+abstract class ReferenceItem {
     static department: string = 'Fiction';
     // title: string;
     // year: number;
@@ -307,23 +307,31 @@ class ReferenceItem {
     getID(): number {
         return this.#id;
     }
-}
-const ref = new ReferenceItem('Clean Code', 2023);
-ref.printItem();
-ref.publisher = 'Collins';
-console.log('Publisher:', ref.publisher);
 
-console.log('ref =', ref);
-console.log('ref ID =', ref.getID());
+    abstract printCitation(): void;
+}
+// const ref = new ReferenceItem('Clean Code', 2023);
+// ref.printItem();
+// ref.publisher = 'Collins';
+// console.log('Publisher:', ref.publisher);
+
+// console.log('ref =', ref);
+// console.log('ref ID =', ref.getID());
 
 class Encyclopedia extends ReferenceItem {
     constructor(title: string, year: number, public edition: number) {
         super(title, year);
     }
+
     override printItem(): void {
         super.printItem();
         console.log(`Edition: ${this.edition} (${this.year})`);
     }
+
+    override printCitation(): void {
+        console.log(`"${this.title}" - ${this.year}`);
+    }
 }
 const refBook = new Encyclopedia('Britannica', 2023, 10);
 refBook.printItem();
+refBook.printCitation();
