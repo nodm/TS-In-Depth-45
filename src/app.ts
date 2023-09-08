@@ -272,3 +272,46 @@ console.log('title:', getProperty(myBook, 'title'));
 console.log('markDamaged:', getProperty(myBook, 'markDamaged'));
 // console.log('isbn:', getProperty(myBook, 'isbn'));
 console.groupEnd();
+
+class ReferenceItem {
+    static department: string = 'Fiction';
+    // title: string;
+    // year: number;
+
+    private _publisher: string = '';
+    public get publisher(): string {
+        // eslint-disable-next-line no-underscore-dangle
+        return this._publisher.toUpperCase();
+    }
+    public set publisher(value: string) {
+        // eslint-disable-next-line no-underscore-dangle
+        this._publisher = value;
+    }
+
+    #id: number;
+
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
+
+    constructor(public title: string, private year: number) {
+        this.#id = Math.ceil(Math.random() * 1_000);
+    }
+
+    printItem() {
+        console.log(`"${this.title}" was published in ${this.year} (Dep. ${ReferenceItem.department})`);
+    }
+
+    getID(): number {
+        return this.#id;
+    }
+}
+const ref = new ReferenceItem('Clean Code', 2023);
+ref.printItem();
+ref.publisher = 'Collins';
+console.log('Publisher:', ref.publisher);
+
+console.log('ref =', ref);
+console.log('ref ID =', ref.getID());
