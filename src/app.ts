@@ -15,13 +15,15 @@ enum Category {
     Angular = 'Angular',
 }
 
-type Book = {
+interface Book {
     id: number;
-    category: Category;
     title: string;
     author: string;
     available: boolean;
-};
+    category: Category;
+    pages?: number;
+    markDamaged?: (reason: string) => void;
+}
 
 function getAllBooks(): readonly Book[] {
     return <const>[
@@ -132,7 +134,7 @@ createCustomer('Anna');
 createCustomer('Foo', 18);
 createCustomer('Buzz', 28, 'Kyiv');
 
-function getBookByID(id: number): Book | undefined {
+function getBookByID(id: Book['id']): Book | undefined {
     const books = getAllBooks();
     return books.find(({ id: bookID }) => bookID === id);
 }
@@ -187,3 +189,23 @@ try {
 } catch (e) {
     console.log('Transform book title 123', e);
 }
+
+function printBook(book: Book): void {
+    console.log(`"${book.title}" by ${book.author}`);
+}
+
+const myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // year: 2015,
+    // copies: 3,
+    pages: 200,
+    markDamaged: (reason: string) => {
+        console.log(`Damaged: ${reason}`);
+    },
+};
+printBook(myBook);
+myBook.markDamaged?.('Missing back cover');
