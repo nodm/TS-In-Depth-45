@@ -296,7 +296,7 @@ class ReferenceItem {
     //     this.year = newYear;
     // }
 
-    constructor(public title: string, private year: number) {
+    constructor(public title: string, protected year: number) {
         this.#id = Math.ceil(Math.random() * 1_000);
     }
 
@@ -315,3 +315,15 @@ console.log('Publisher:', ref.publisher);
 
 console.log('ref =', ref);
 console.log('ref ID =', ref.getID());
+
+class Encyclopedia extends ReferenceItem {
+    constructor(title: string, year: number, public edition: number) {
+        super(title, year);
+    }
+    override printItem(): void {
+        super.printItem();
+        console.log(`Edition: ${this.edition} (${this.year})`);
+    }
+}
+const refBook = new Encyclopedia('Britannica', 2023, 10);
+refBook.printItem();
