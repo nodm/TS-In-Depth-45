@@ -1,4 +1,4 @@
-import { RefBook, UL } from './classes';
+import { RefBook, UL, Library } from './classes';
 import { Category } from './enums';
 import {
     showHello,
@@ -173,3 +173,11 @@ if (flag) {
     reader.name = 'Anna';
     console.log(reader);
 }
+
+// const library: Library = new Library(1, 'John Smith', 'Baker St., 223B');
+const library: Library = {
+    id: 1,
+    name: 'John Smith',
+    address: 'Baker St., 223B',
+};
+console.log('Library:', library);
