@@ -137,6 +137,7 @@ refBook.printItem();
 refBook.printCitation();
 
 const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
+console.log('Decorated UniversityLibrarian', favoriteLibrarian);
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
 
 const personBook: PersonBook = {
