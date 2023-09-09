@@ -1,4 +1,4 @@
-import { ReferenceItem, UniversityLibrarian } from './classes';
+import { UniversityLibrarian } from './classes';
 import { Category } from './enums';
 import {
     showHello,
@@ -16,9 +16,11 @@ import {
     getBookByID,
     getTitles,
     bookTitleTransform,
+    printRefBook,
 } from './functions';
-import { Logger, Book, Person, Author, Librarian, TOptions } from './interfaces';
+import { Logger, Book, Author, Librarian } from './interfaces';
 import { PersonBook } from './types';
+import RefBook from './encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -128,21 +130,7 @@ console.groupEnd();
 // console.log('ref =', ref);
 // console.log('ref ID =', ref.getID());
 
-class Encyclopedia extends ReferenceItem {
-    constructor(title: string, year: number, public edition: number) {
-        super(title, year);
-    }
-
-    override printItem(): void {
-        super.printItem();
-        console.log(`Edition: ${this.edition} (${this.year})`);
-    }
-
-    override printCitation(): void {
-        console.log(`"${this.title}" - ${this.year}`);
-    }
-}
-const refBook = new Encyclopedia('Britannica', 2023, 10);
+const refBook = new RefBook('Britannica', 2023, 10);
 refBook.printItem();
 refBook.printCitation();
 
@@ -161,3 +149,15 @@ const personBook: PersonBook = {
     // markDamaged?: DamageLogger;
 };
 console.log('personBook:', personBook);
+
+console.group('printRefBook:');
+printRefBook(refBook);
+console.groupEnd();
+
+console.group('printRefBook for favoriteLibrarian:');
+try {
+    printRefBook(favoriteLibrarian);
+} catch (e) {
+    console.log(e);
+}
+console.groupEnd();

@@ -1,5 +1,6 @@
 /* eslint-disable no-redeclare */
 
+import RefBook from './encyclopedia';
 import { Category } from './enums';
 import { Book, TOptions } from './interfaces';
 import { BookOrUndefined, BookProperties } from './types';
@@ -154,4 +155,14 @@ export function setDefaultConfig(options: TOptions) {
         duration: options.duration ?? 3,
         speed: options.speed ?? 50,
     };
+}
+
+export function assertRefBookInstance(condition: any): asserts condition {
+    if (!condition) throw new Error('It is not an instance of RefBook');
+}
+
+export function printRefBook(data: any): void {
+    assertRefBookInstance(data instanceof RefBook);
+
+    data.printItem();
 }
