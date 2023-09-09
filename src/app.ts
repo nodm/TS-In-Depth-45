@@ -18,6 +18,7 @@ import {
     bookTitleTransform,
     printRefBook,
     purge,
+    getObjectProperty,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { PersonBook } from './types';
@@ -210,3 +211,16 @@ magazines.forEach(item => {
     magazineShelf.add(item);
 });
 console.log('Firs magazine on  the shelve:', magazineShelf.getFirst());
+
+console.group('Magazine titles:');
+magazineShelf.printTitles();
+console.groupEnd();
+
+console.group('Find "Five Points" magazine:');
+console.log(magazineShelf.find('Five Points'));
+console.groupEnd();
+
+const foo = getObjectProperty(magazines[0], 'title');
+console.log(`Magazine\'s title: ${getObjectProperty(magazines[0], 'title')}`);
+console.log(`Magazine\'s publisher: ${getObjectProperty(magazines[0], 'publisher')}`);
+console.log(`Book\'s author: ${getObjectProperty(getAllBooks()[0], 'author')}`);

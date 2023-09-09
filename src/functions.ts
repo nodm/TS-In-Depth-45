@@ -145,9 +145,9 @@ export function printBook(book: Book): void {
 export function getProperty(book: Book, prop: BookProperties): string | any {
     if (typeof book[prop] === 'function') {
         return (book[prop] as Function).name;
-    } else {
-        return book[prop];
     }
+
+    return book[prop];
 }
 
 export function setDefaultConfig(options: TOptions) {
@@ -169,4 +169,15 @@ export function printRefBook(data: any): void {
 
 export function purge<T>(inventory: T[]): T[] {
     return inventory.slice(2);
+}
+
+export function getObjectProperty<TObject extends object, TKey extends keyof TObject>(
+    obj: TObject,
+    prop: TKey,
+): TObject[TKey] | string {
+    if (typeof obj[prop] === 'function') {
+        return (obj[prop] as Function).name;
+    }
+
+    return obj[prop];
 }
