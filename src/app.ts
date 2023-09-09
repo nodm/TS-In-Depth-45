@@ -21,7 +21,7 @@ import {
     getObjectProperty,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
-import { PersonBook } from './types';
+import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
 
 showHello('greeting', 'TypeScript');
 
@@ -220,7 +220,26 @@ console.group('Find "Five Points" magazine:');
 console.log(magazineShelf.find('Five Points'));
 console.groupEnd();
 
-const foo = getObjectProperty(magazines[0], 'title');
 console.log(`Magazine\'s title: ${getObjectProperty(magazines[0], 'title')}`);
 console.log(`Magazine\'s publisher: ${getObjectProperty(magazines[0], 'publisher')}`);
 console.log(`Book\'s author: ${getObjectProperty(getAllBooks()[0], 'author')}`);
+
+const bookRequiredFields: BookRequiredFields = {
+    id: 1,
+    title: 'Learn TypeScript',
+    author: 'Anna',
+    available: false,
+    category: Category.TypeScript,
+    pages: 300,
+    markDamaged: (reason: string): void => {
+        console.log('Damaged:', reason);
+    },
+};
+console.log('bookRequiredFields:', bookRequiredFields);
+const updatedBook: UpdatedBook = {
+    id: 1,
+};
+console.log('Updated book:', updatedBook);
+
+const params: Parameters<CreateCustomerFunctionType> = ['Anna'];
+createCustomer(...params);

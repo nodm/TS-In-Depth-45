@@ -1,9 +1,16 @@
-import { Book, Person } from './interfaces';
+import { createCustomer } from './functions';
+import { Author, Book, Person } from './interfaces';
 
-type BookProperties = keyof Book;
+export type BookProperties = keyof Book;
 
-type PersonBook = Person & Book;
+export type PersonBook = Person & Book;
 
-type BookOrUndefined = Book | undefined;
+export type BookOrUndefined = Book | undefined;
 
-export { BookProperties, PersonBook, BookOrUndefined };
+export type BookRequiredFields = Required<Book>;
+
+export type UpdatedBook = Partial<Book>;
+
+export type AuthorWoEmail = Omit<Author, 'email'>;
+
+export type CreateCustomerFunctionType = typeof createCustomer;
