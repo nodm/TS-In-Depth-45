@@ -3,7 +3,7 @@
 import RefBook from './classes/Encyclopedia';
 import { Category } from './enums';
 import { Book, TOptions } from './interfaces';
-import { BookOrUndefined, BookProperties } from './types';
+import { BookOrUndefined, BookProperties, UpdateResult } from './types';
 
 export function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
@@ -180,4 +180,10 @@ export function getObjectProperty<TObject extends object, TKey extends keyof TOb
     }
 
     return obj[prop];
+}
+
+export function update<T extends boolean>(p: T): UpdateResult<T> {
+    if (p) return 'abc' as UpdateResult<T>;
+
+    return 10 as UpdateResult<T>;
 }

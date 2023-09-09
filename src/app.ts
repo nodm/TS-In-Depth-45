@@ -19,6 +19,7 @@ import {
     printRefBook,
     purge,
     getObjectProperty,
+    update,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
@@ -243,3 +244,6 @@ console.log('Updated book:', updatedBook);
 
 const params: Parameters<CreateCustomerFunctionType> = ['Anna'];
 createCustomer(...params);
+
+const u1 = update(true); // string
+const u2 = update(false); // number
