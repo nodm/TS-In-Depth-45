@@ -136,9 +136,12 @@ const refBook = new RefBook('Britannica', 2023, 10);
 refBook.printItem();
 refBook.printCitation();
 
-const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
+console.group('Decorating UniversityLibrarian');
+const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('Anna', 'john.smith@gmail.com', 'Fiction');
 console.log('Decorated UniversityLibrarian', favoriteLibrarian);
+(favoriteLibrarian as any)?.printLibrarian();
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
+console.groupEnd();
 
 const personBook: PersonBook = {
     name: 'Foo Buzz',
