@@ -4,4 +4,5 @@ export enum Category {
     HTML = 'HTML',
     TypeScript = 'TypeScript',
     Angular = 'Angular',
+    Software = 'Software',
 }

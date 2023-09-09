@@ -17,6 +17,7 @@ import {
     getTitles,
     bookTitleTransform,
     printRefBook,
+    purge,
 } from './functions';
 import { Logger, Book, Author, Librarian } from './interfaces';
 import { PersonBook } from './types';
@@ -181,3 +182,15 @@ const library: Library = {
     address: 'Baker St., 223B',
 };
 console.log('Library:', library);
+
+const inventory = [
+    { id: 10, title: 'The C Programming Language', author: 'K & R', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software },
+];
+console.log('Purge inventory:', purge<(typeof inventory)[number]>(inventory));
+console.log('Purge numbers:', purge<number>([1, 2, 3, 4, 5]));
+const purgeNumbers = purge<number>;
+console.log('Call "purgeNumbers" with number array:', purgeNumbers([1, 2, 3, 4, 5]));
+// console.log('Call "purgeNumbers" with array of strings:', purgeNumbers(['1', '2', '3', '4', '5']));
