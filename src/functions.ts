@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 
-import RefBook from './encyclopedia';
+import RefBook from './classes/Encyclopedia';
 import { Category } from './enums';
 import { Book, TOptions } from './interfaces';
 import { BookOrUndefined, BookProperties } from './types';

@@ -1,4 +1,4 @@
-import { UniversityLibrarian } from './classes';
+import { RefBook, UL } from './classes';
 import { Category } from './enums';
 import {
     showHello,
@@ -20,7 +20,6 @@ import {
 } from './functions';
 import { Logger, Book, Author, Librarian } from './interfaces';
 import { PersonBook } from './types';
-import RefBook from './encyclopedia';
 
 showHello('greeting', 'TypeScript');
 
@@ -134,7 +133,7 @@ const refBook = new RefBook('Britannica', 2023, 10);
 refBook.printItem();
 refBook.printCitation();
 
-const favoriteLibrarian: Librarian = new UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
+const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('John Smith', 'john.smith@gmail.com', 'Fiction');
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
 
 const personBook: PersonBook = {
