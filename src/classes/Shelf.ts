@@ -1,4 +1,4 @@
-export default class Shelve<T> {
+export default class Shelf<T> {
     private items: T[] = [];
 
     add(item: T): void {

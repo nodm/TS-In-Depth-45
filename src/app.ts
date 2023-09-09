@@ -1,4 +1,4 @@
-import { RefBook, UL, Library, Shelve } from './classes';
+import { RefBook, UL, Library, Shelf } from './classes';
 import { Category } from './enums';
 import {
     showHello,
@@ -195,7 +195,7 @@ const inventory = [
 // console.log('Call "purgeNumbers" with number array:', purgeNumbers([1, 2, 3, 4, 5]));
 // // console.log('Call "purgeNumbers" with array of strings:', purgeNumbers(['1', '2', '3', '4', '5']));
 
-const bookShelve = new Shelve<(typeof inventory)[number]>();
+const bookShelve = new Shelf<(typeof inventory)[number]>();
 inventory.forEach(item => {
     bookShelve.add(item);
 });
@@ -205,7 +205,7 @@ const magazines: Magazine[] = [
     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
     { title: 'Five Points', publisher: 'GSU' },
 ];
-const magazineShelf = new Shelve<Magazine>();
+const magazineShelf = new Shelf<Magazine>();
 magazines.forEach(item => {
     magazineShelf.add(item);
 });
