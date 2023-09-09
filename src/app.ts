@@ -160,3 +160,16 @@ try {
     console.log(e);
 }
 console.groupEnd();
+
+const flag = true;
+if (flag) {
+    // import('./classes').then((module) => {
+    //   const reader = new module.Reader();
+    //   reader.name = 'Anna';
+    //   console.log(reader);
+    // });
+    const module = await import('./classes');
+    const reader = new module.Reader();
+    reader.name = 'Anna';
+    console.log(reader);
+}
