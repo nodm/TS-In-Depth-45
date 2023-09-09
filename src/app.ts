@@ -1,4 +1,4 @@
-import { RefBook, UL, Library } from './classes';
+import { RefBook, UL, Library, Shelve } from './classes';
 import { Category } from './enums';
 import {
     showHello,
@@ -19,7 +19,7 @@ import {
     printRefBook,
     purge,
 } from './functions';
-import { Logger, Book, Author, Librarian } from './interfaces';
+import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { PersonBook } from './types';
 
 showHello('greeting', 'TypeScript');
@@ -189,8 +189,24 @@ const inventory = [
     { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software },
 ];
-console.log('Purge inventory:', purge<(typeof inventory)[number]>(inventory));
-console.log('Purge numbers:', purge<number>([1, 2, 3, 4, 5]));
-const purgeNumbers = purge<number>;
-console.log('Call "purgeNumbers" with number array:', purgeNumbers([1, 2, 3, 4, 5]));
-// console.log('Call "purgeNumbers" with array of strings:', purgeNumbers(['1', '2', '3', '4', '5']));
+// console.log('Purge inventory:', purge<(typeof inventory)[number]>(inventory));
+// console.log('Purge numbers:', purge<number>([1, 2, 3, 4, 5]));
+// const purgeNumbers = purge<number>;
+// console.log('Call "purgeNumbers" with number array:', purgeNumbers([1, 2, 3, 4, 5]));
+// // console.log('Call "purgeNumbers" with array of strings:', purgeNumbers(['1', '2', '3', '4', '5']));
+
+const bookShelve = new Shelve<(typeof inventory)[number]>();
+inventory.forEach(item => {
+    bookShelve.add(item);
+});
+console.log('Firs book on the shelve:', bookShelve.getFirst());
+const magazines: Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' },
+];
+const magazineShelf = new Shelve<Magazine>();
+magazines.forEach(item => {
+    magazineShelf.add(item);
+});
+console.log('Firs magazine on  the shelve:', magazineShelf.getFirst());
