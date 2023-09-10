@@ -1,4 +1,4 @@
-import { freeze, logger } from '../decorators';
+import { freeze, logger, writable } from '../decorators';
 import * as Interfaces from '../interfaces';
 
 @freeze('Hello')
@@ -10,5 +10,15 @@ export class UniversityLibrarian implements Interfaces.Librarian {
 
     assistCustomer(customerName: string, bookTitle: string): void {
         console.log(`${this.name} is assisting ${customerName} with the book ${bookTitle}`);
+    }
+
+    @writable(true)
+    assistFaculty(): void {
+        console.log('Assisting faculty');
+    }
+
+    @writable(false)
+    teachCommunity(): void {
+        console.log('Teaching community');
     }
 }

@@ -141,6 +141,9 @@ const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('Anna', 'john.sm
 console.log('Decorated UniversityLibrarian', favoriteLibrarian);
 (favoriteLibrarian as any)?.printLibrarian();
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
+(favoriteLibrarian as any).assistFaculty();
+(favoriteLibrarian as any).teachCommunity();
+// (favoriteLibrarian as any).teachCommunity = () => {};
 console.groupEnd();
 
 const personBook: PersonBook = {

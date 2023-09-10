@@ -1,3 +1,6 @@
+// A practical guide to TypeScript decorators by Rahman Fadhil
+// https://blog.logrocket.com/practical-guide-typescript-decorators/#class-decorators
+
 export function freeze(p: string) {
     return function (originalClass: Function, { kind, name }: ClassDecoratorContext): void {
         // if (kind !== 'class') throw new TypeError('The "freeze" decorator must be applied to the class');
@@ -16,7 +19,7 @@ export function logger(originalClass: Function, { kind }: ClassDecoratorContext)
     const newConstructor: any = function (this: any, ...args: any[]) {
         console.log('Creating new instance');
         console.log(originalClass.name);
-        console.log(...args);
+        console.log(...args); // Missed in the decorated class
 
         // originalClass.apply(this, args);
         this.age = 30;
@@ -30,4 +33,17 @@ export function logger(originalClass: Function, { kind }: ClassDecoratorContext)
     };
 
     return newConstructor;
+}
+
+export function writable(isWritable: boolean) {
+    return function (originalMethod: Function, context: ClassMethodDecoratorContext) {
+        if (context.kind !== 'method') return;
+
+        context.addInitializer(function () {
+            Object.defineProperty(Object.getPrototypeOf(this), context.name, {
+                writable: isWritable,
+                // value: originalMethod,
+            });
+        });
+    };
 }
