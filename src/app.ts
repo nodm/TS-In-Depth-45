@@ -254,3 +254,7 @@ createCustomer(...params);
 
 const u1 = update(true); // string
 const u2 = update(false); // number
+
+console.group('Property decorator for Library');
+console.log(new Library());
+console.groupEnd();

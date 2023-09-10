@@ -53,11 +53,24 @@ export function timeout(delayMs: number) {
         if (context.kind !== 'method') return;
 
         return function replacedMethod(this: any, ...args: unknown[]) {
-            if (window.confirm(`Are you sure you  want tto execute method "${String(context.name)}"?`)) {
-                setTimeout(() => {
-                    originalMethod.apply(this, ...args);
-                }, delayMs);
-            }
+            // if (window.confirm(`Are you sure you  want tto execute method "${String(context.name)}"?`)) {
+            //     setTimeout(() => {
+            //         originalMethod.apply(this, ...args);
+            //     }, delayMs);
+            // }
+            setTimeout(() => {
+                originalMethod.apply(this, ...args);
+            }, delayMs);
+        };
+    };
+}
+
+export function setInitial(inputValue: number) {
+    return function (value: undefined, context: ClassFieldDecoratorContext) {
+        if (context.kind !== 'field') return;
+
+        return function (initValue: number) {
+            return initValue + inputValue;
         };
     };
 }
