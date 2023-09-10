@@ -137,12 +137,16 @@ refBook.printItem();
 refBook.printCitation();
 
 console.group('Decorating UniversityLibrarian');
-const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('Anna', 'john.smith@gmail.com', 'Fiction');
+// const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('Anna', 'john.smith@gmail.com', 'Fiction');
+const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.email = 'a@gmail.com';
+favoriteLibrarian.department = 'Fiction';
 console.log('Decorated UniversityLibrarian', favoriteLibrarian);
-(favoriteLibrarian as any)?.printLibrarian();
+// (favoriteLibrarian as any)?.printLibrarian();
 favoriteLibrarian.assistCustomer('Foo Buzz', 'Clean Code');
-(favoriteLibrarian as any).assistFaculty();
-(favoriteLibrarian as any).teachCommunity();
+// (favoriteLibrarian as any).assistFaculty();
+// (favoriteLibrarian as any).teachCommunity();
 // (favoriteLibrarian as any).teachCommunity = () => {};
 console.groupEnd();
 

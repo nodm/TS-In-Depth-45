@@ -74,3 +74,18 @@ export function setInitial(inputValue: number) {
         };
     };
 }
+
+export function format<This, Return>(pref: string) {
+    return function (target: ClassAccessorDecoratorTarget<This, Return>, context: ClassAccessorDecoratorContext) {
+        if (context.kind !== 'accessor') return;
+
+        return {
+            get(this: This): Return {
+                return `${pref} ${target.get.call(this)}` as Return;
+            },
+            set(this: This, value: Return) {
+                target.set.call(this, value);
+            },
+        } as ClassAccessorDecoratorResult<This, Return>;
+    };
+}
