@@ -89,3 +89,15 @@ export function format<This, Return>(pref: string) {
         } as ClassAccessorDecoratorResult<This, Return>;
     };
 }
+
+export function positiveInteger(originalSetter: Function, context: ClassSetterDecoratorContext) {
+    if (context.kind !== 'setter') return;
+
+    const newSetter = function (this: any, value: number) {
+        if (value < 1 && Number.isInteger(value)) throw new Error(`Invalid value (${value})`);
+
+        originalSetter.call(this, value);
+    };
+
+    return newSetter;
+}

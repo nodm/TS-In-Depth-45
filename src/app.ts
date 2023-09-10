@@ -132,9 +132,25 @@ console.groupEnd();
 // console.log('ref =', ref);
 // console.log('ref ID =', ref.getID());
 
+console.group('RefBook');
 const refBook = new RefBook('Britannica', 2023, 10);
 refBook.printItem();
 refBook.printCitation();
+try {
+    console.log('Set number of copies to -10 - shout throw an error');
+    refBook.copies = -10;
+} catch (e) {
+    console.log(e);
+}
+try {
+    console.log('Set number of copies to 0 - shout throw an error');
+    refBook.copies = 0;
+} catch (e) {
+    console.log(e);
+}
+refBook.copies = 4.5;
+refBook.copies = 5;
+console.groupEnd();
 
 console.group('Decorating UniversityLibrarian');
 // const favoriteLibrarian: Librarian = new UL.UniversityLibrarian('Anna', 'john.smith@gmail.com', 'Fiction');
