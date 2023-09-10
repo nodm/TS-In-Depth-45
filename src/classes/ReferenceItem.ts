@@ -1,3 +1,5 @@
+import { timeout } from '../decorators';
+
 export abstract class ReferenceItem {
     static department: string = 'Fiction';
     // title: string;
@@ -23,6 +25,7 @@ export abstract class ReferenceItem {
         this.#id = Math.ceil(Math.random() * 1000);
     }
 
+    @timeout(1_000)
     printItem() {
         console.log(`"${this.title}" was published in ${this.year} (Dep. ${ReferenceItem.department})`);
     }

@@ -47,3 +47,17 @@ export function writable(isWritable: boolean) {
         });
     };
 }
+
+export function timeout(delayMs: number) {
+    return function (originalMethod: Function, context: ClassMethodDecoratorContext) {
+        if (context.kind !== 'method') return;
+
+        return function replacedMethod(this: any, ...args: unknown[]) {
+            if (window.confirm(`Are you sure you  want tto execute method "${String(context.name)}"?`)) {
+                setTimeout(() => {
+                    originalMethod.apply(this, ...args);
+                }, delayMs);
+            }
+        };
+    };
+}
