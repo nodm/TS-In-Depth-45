@@ -2,7 +2,7 @@
 
 import RefBook from './classes/Encyclopedia';
 import { Category } from './enums';
-import { Book, TOptions } from './interfaces';
+import { Book, Callback, LibMgrCallback, TOptions } from './interfaces';
 import { BookOrUndefined, BookProperties, UpdateResult } from './types';
 
 export function showHello(divName: string, name: string) {
@@ -187,3 +187,21 @@ export function update<T extends boolean>(p: T): UpdateResult<T> {
 
     return 10 as UpdateResult<T>;
 }
+
+export function getBooksByCategory(category: Category, callback: LibMgrCallback) {
+    setTimeout(() => {
+        try {
+            const titles = getBookTitlesByCategory(category);
+            if (!titles.length) throw new Error('No books found.');
+            callback(null, titles);
+        } catch (error) {
+            callback(error as Error, null);
+        }
+    }, 2_000);
+}
+
+export const logCategorySearch: LibMgrCallback = function (err: Error | null, result: string[] | null) {
+    if (err) {
+        console.log(err.message);
+    } else console.log(result);
+};

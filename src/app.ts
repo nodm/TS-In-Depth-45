@@ -20,6 +20,8 @@ import {
     purge,
     getObjectProperty,
     update,
+    getBooksByCategory,
+    logCategorySearch,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
@@ -277,4 +279,11 @@ const u2 = update(false); // number
 
 console.group('Property decorator for Library');
 console.log(new Library());
+console.groupEnd();
+
+console.group('Call logCategorySearch with JavaScript');
+getBooksByCategory(Category.JavaScript, logCategorySearch);
+console.groupEnd();
+console.group('Call logCategorySearch with Software');
+getBooksByCategory(Category.Software, logCategorySearch);
 console.groupEnd();
