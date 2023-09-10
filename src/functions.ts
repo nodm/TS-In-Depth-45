@@ -205,3 +205,26 @@ export const logCategorySearch: LibMgrCallback = function (err: Error | null, re
         console.log(err.message);
     } else console.log(result);
 };
+
+export function getBooksByCategoryPromise(category: Category): Promise<string[]> {
+    // return new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         try {
+    //             const titles = getBookTitlesByCategory(category);
+    //             if (!titles.length) throw new Error('No books found.');
+    //             resolve(titles);
+    //         } catch (error) {
+    //             reject(error as Error);
+    //         }
+    //     }, 2_000);
+    // });
+    return new Promise((resolve, reject) => {
+        getBooksByCategory(category, (error, data) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(data!);
+            }
+        });
+    });
+}

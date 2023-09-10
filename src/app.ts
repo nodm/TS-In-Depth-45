@@ -22,6 +22,7 @@ import {
     update,
     getBooksByCategory,
     logCategorySearch,
+    getBooksByCategoryPromise,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
@@ -287,3 +288,24 @@ console.groupEnd();
 console.group('Call logCategorySearch with Software');
 getBooksByCategory(Category.Software, logCategorySearch);
 console.groupEnd();
+
+console.log('Calling getBooksByCategoryPromise with "Software"');
+getBooksByCategoryPromise(Category.Software)
+    .then(titles => {
+        console.log('Titles for the "Software" category:', titles);
+    })
+    .catch(error => {
+        console.log('No title found for the "Software" category:', error?.message);
+    });
+console.log('Calling getBooksByCategoryPromise with "JavaScript"');
+getBooksByCategoryPromise(Category.JavaScript)
+    .then(titles => {
+        console.log('Titles for the "JavaScript" category:', titles);
+        return titles.length;
+    })
+    .then(numberOfTitles => {
+        console.log(`${numberOfTitles} book(s) found.`);
+    })
+    .catch(error => {
+        console.log('No title found for the "JavaScript" category:', error?.message);
+    });
