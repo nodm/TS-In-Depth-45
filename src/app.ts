@@ -23,6 +23,7 @@ import {
     getBooksByCategory,
     logCategorySearch,
     getBooksByCategoryPromise,
+    logSearchResults,
 } from './functions';
 import { Logger, Book, Author, Librarian, Magazine } from './interfaces';
 import { BookRequiredFields, CreateCustomerFunctionType, PersonBook, UpdatedBook } from './types';
@@ -309,3 +310,7 @@ getBooksByCategoryPromise(Category.JavaScript)
     .catch(error => {
         console.log('No title found for the "JavaScript" category:', error?.message);
     });
+
+console.log('Before calling "logSearchResults"');
+logSearchResults(Category.JavaScript);
+console.log('After calling "logSearchResults"');
